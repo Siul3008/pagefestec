@@ -1,0 +1,4 @@
+.site-footer{padding:1.5rem 0;background:var(--cream)}
+.footer-original{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:2.5rem;background:#573b2b;color:#fff;padding:1.2rem 1.7rem;align-items:start}
+.footer-original h2{font-size:1.35rem;font-weight:400;margin:0 0 .35rem}.footer-original h3{font-family:Arial,sans-serif;font-size:.75rem;font-weight:400;margin:0 0 .8rem}.footer-original p{font-family:Arial,sans-serif;font-size:.62rem;line-height:1.5;margin:0}.footer-original a{color:#fff;text-decoration:none}
+@media(max-width:760px){.site-footer{padding:1rem 0}.footer-original{grid-template-columns:1fr;gap:1.2rem;padding:1.2rem}.footer-original h3{margin-bottom:.35rem}}

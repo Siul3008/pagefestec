@@ -1,0 +1,7 @@
+@media(max-width:760px){
+  .track-grid{grid-template-columns:1fr;gap:2.5rem}
+  .track{display:block;text-align:center}
+  .track img{width:min(100%,340px);aspect-ratio:1/1;margin:0 auto 1rem}
+  .track h3{margin:.2rem 0 1.3rem;font-size:1.15rem}
+  .track p{font-size:.85rem;max-width:340px;margin:0 auto}
+}

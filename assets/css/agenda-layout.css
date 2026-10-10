@@ -1,0 +1,12 @@
+.agenda{padding:2.4rem 0 0}
+.agenda .agenda-title .kicker{display:none}
+.agenda .agenda-title h2{font-family:Georgia,'Times New Roman',serif;font-size:1.15rem;letter-spacing:.22em;line-height:1;font-style:normal}
+.agenda .agenda-title h2 br{display:none}
+#agenda-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.8rem;margin:4rem auto 2.4rem;max-width:720px}
+.agenda-day{display:block;padding:0;border:0;text-align:center}
+.agenda-day>div{display:block}.agenda-day span,.agenda-day small{display:none}
+.agenda-day h3{font-family:Georgia,'Times New Roman',serif;font-size:.88rem;text-decoration:underline;margin:0 0 1.5rem}
+.agenda-day ul{display:block;font-family:Georgia,'Times New Roman',serif;font-size:.78rem;line-height:1.5}
+.agenda-day li{margin:0 0 1rem}.agenda-day li:before{display:none}
+.agenda-link{display:flex;width:min(860px,100%);margin:auto;padding:.72rem;justify-content:center;background:var(--teal);border-color:var(--teal);color:#fff;font-family:Georgia,'Times New Roman',serif;font-size:.7rem}
+@media(max-width:760px){#agenda-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:2.2rem 1rem;margin:2.7rem 0 2rem}.agenda-day h3{font-size:.75rem;margin-bottom:.9rem}.agenda-day ul{font-size:.67rem}.agenda-day li{margin-bottom:.6rem}}
