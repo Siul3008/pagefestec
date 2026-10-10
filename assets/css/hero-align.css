@@ -1,0 +1,3 @@
+.hero-copy{justify-self:center;text-align:center}
+.hero-copy .instagram{margin-inline:auto}
+@media(max-width:760px){.hero-copy{justify-self:stretch}}
