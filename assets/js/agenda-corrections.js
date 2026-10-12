@@ -9,11 +9,11 @@
 
   schedule.innerHTML = [
     '<div class="head">HORA</div><div class="head">MARTES 20 OCTUBRE</div><div class="head">MIÉRCOLES 21 OCTUBRE</div><div class="head">JUEVES 22 OCTUBRE</div><div class="head">VIERNES 23 OCTUBRE</div>',
-    time('10:00'), event('Acto inicial'), blank, event(link('basketball', 'Baloncesto')), blank,
-    time('11:00'), event(`${link('origami', 'Taller de Origami')} / ${link('futbol', 'Fútbol')}`), event(`${link('esports', 'Torneo de E-Sports')} / ${link('voleibol', 'Voleibol')}<br>${link('pintura', 'Pintura de Lienzos')}`), event(link('pintura', 'Pintura de Tote Bags')), blank,
-    time('13:00'), blank, blank, event(`${link('feria', 'Feria de emprendimientos')}<br>Intercambio de libros / Recolección de residuos`), event(link('ajedrez', 'Ajedrez')),
-    time('15:00'), event(`${link('baile-teatro', 'Torneo de Just Dance')}<br>${link('crochet', 'Taller de Crochet')}`), blank, blank, blank,
-    time('16:00'), event(link('cafe-juegos', 'Café y juegos de mesa')), event(link('badminton', 'Badminton')), blank, event(link('bingo', 'Bingo')),
+    time('10:00'), event('Acto inicial'), blank, blank, blank,
+    time('11:00'), event(`${link('origami', 'Taller de Origami')} / ${link('futbol', 'Fútbol')}<br><small>Fútbol: 11:00 a. m. – 1:00 p. m.</small>`), event(`${link('voleibol', 'Voleibol')}<br><small>11:00 a. m. – 1:00 p. m.</small><br>${link('pintura', 'Pintura de Lienzos')}`), event(`${link('basketball', 'Baloncesto')}<br><small>11:00 a. m. – 1:00 p. m.</small><br>${link('pintura', 'Pintura de Tote Bags')}`), event(`${link('badminton', 'Badminton')} / ${link('ajedrez', 'Ajedrez')}<br><small>11:00 a. m. – 1:00 p. m.</small>`),
+    time('13:00'), blank, blank, event(`${link('feria', 'Feria de emprendimientos')}<br>Intercambio de libros / Recolección de residuos`), blank,
+    time('15:00'), event(`${link('baile-teatro', 'Torneo de Just Dance')}<br>${link('crochet', 'Taller de Crochet')}`), blank, event(`${link('bingo', 'Bingo')}<br><small>3:00 p. m. – 5:00 p. m.</small>`), event(`${link('esports', 'Torneo de Videojuegos')}<br><small>3:00 p. m. – 6:30 p. m.</small>`),
+    time('16:00'), event(link('cafe-juegos', 'Café y juegos de mesa')), blank, blank, blank,
     time('17:00'), blank, event(`${link('cine', 'Noche de cine')} / ${link('baile', 'Taller de baile')}`), blank, blank,
     time('18:00'), event(link('scape-room', 'Scape Room')), blank, blank, blank,
     time('20:00'), event('Taller de finanzas'), blank, event(link('parrillada', 'Parrillada / Trivia')), event('Cierre y premiación de torneos')
