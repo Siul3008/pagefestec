@@ -12,9 +12,10 @@
 
   const group = (day, start, duration, items) => {
     const cards = items.map(item =>
-      `<div class="mini-event" style="grid-column:${item.column};grid-row:${item.offset + 1}/span ${item.duration}">${item.content}</div>`
+      `<div class="mini-event ${item.className || ''}" style="grid-column:${item.column};grid-row:${item.offset + 1}/span ${item.duration}${item.style ? `;${item.style}` : ''}">${item.content}</div>`
     ).join('');
-    return `<div class="event-group" style="${position(day, start, duration)};--hours:${duration}">${cards}</div>`;
+    const lanes = Math.max(...items.map(item => item.column));
+    return `<div class="event-group" style="${position(day, start, duration)};--hours:${duration};--lanes:${lanes}">${cards}</div>`;
   };
 
   const heads = [
@@ -34,49 +35,47 @@
   }).join('');
 
   schedule.innerHTML = heads + times + [
-    block(2, 10, 1, link('acto-inicial', 'Acto inicial')),
+    block(2, 10, 1, link('acto-inicial', 'Acto inicial'), 'tone-pink'),
     group(2, 11, 2, [
-      { column: 1, offset: 0, duration: 2, content: link('futbol', 'Torneo FUT 3x3') },
-      { column: 2, offset: 0, duration: 1, content: link('origami', 'Taller de Origami') }
+      { column: 1, offset: 0, duration: 2, className: 'tone-olive', content: link('futbol', 'Torneo FUT 3x3') },
+      { column: 2, offset: 0, duration: 1, className: 'tone-pink', content: link('origami', 'Taller de Origami') }
     ]),
-    block(2, 14, 1, link('crochet', 'Taller de Crochet')),
-    block(2, 15, 2, link('finanzas', 'Taller de finanzas')),
-    block(2, 17, 2, link('scape-room', 'Scape Room Intercarreras')),
+    block(2, 14, 1, link('crochet', 'Taller de Crochet'), 'tone-cream'),
+    block(2, 15, 2, link('finanzas', 'Taller de finanzas'), 'tone-olive'),
+    block(2, 17, 2, link('scape-room', 'Scape Room Intercarreras'), 'tone-pink'),
 
     group(3, 11, 2, [
-      { column: 1, offset: 0, duration: 2, content: link('voleibol', 'Torneo de Voleibol') },
-      { column: 2, offset: 0, duration: 1, content: link('pintura', 'Pintura de lienzo') }
+      { column: 1, offset: 0, duration: 2, className: 'tone-cream', content: link('voleibol', 'Torneo de Voleibol') },
+      { column: 2, offset: 0, duration: 1, className: 'tone-pink', content: link('pintura', 'Pintura de lienzo') }
     ]),
-    block(3, 12, 6, `${link('feria', 'Feria de emprendedores')}`, 'narrow-right'),
-    block(3, 14, 2, link('tour-amon', 'Tour Amón'), 'narrow-left'),
-    block(3, 16, 2, link('esports', 'Torneo de E-Sports'), 'narrow-left'),
+    block(3, 12, 6, `${link('feria', 'Feria de emprendedores')}`, 'narrow-right tone-cream'),
+    block(3, 14, 2, link('tour-amon', 'Tour Amón'), 'narrow-left tone-olive'),
+    block(3, 16, 2, link('esports', 'Torneo de E-Sports'), 'narrow-left tone-pink'),
     group(3, 18, 3, [
-      { column: 1, offset: 0, duration: 3, content: link('parrillada', 'Parrillada') },
-      { column: 2, offset: 0, duration: 3, content: `${link('photobooth', 'Photobooth')}<br><span class="event-separator">+</span><br>${link('karaoke', 'Karaoke')}` }
+      { column: 1, offset: 0, duration: 3, className: 'tone-olive', content: link('parrillada', 'Parrillada') },
+      { column: 2, offset: 0, duration: 3, className: 'tone-cream', content: `${link('photobooth', 'Photobooth')}<br><span class="event-separator">+</span><br>${link('karaoke', 'Karaoke')}` },
+      { column: 3, offset: 0, duration: 3, className: 'tone-pink', style: 'height:83.333%;align-self:start', content: `${link('baile', 'Taller de baile')}<br><small>6:00–8:30 p. m.</small>` }
     ]),
 
     group(4, 11, 2, [
-      { column: 1, offset: 0, duration: 2, content: link('totebags', 'Pintura de Tote Bags') },
-      { column: 2, offset: 0, duration: 2, content: link('basketball', 'Torneo de Baloncesto') }
+      { column: 1, offset: 0, duration: 2, className: 'tone-olive', content: link('totebags', 'Pintura de Tote Bags') },
+      { column: 2, offset: 0, duration: 2, className: 'tone-pink', content: link('basketball', 'Torneo de Baloncesto') }
     ]),
     group(4, 13, 2, [
-      { column: 1, offset: 0, duration: 2, content: link('intercambio-libros', 'Intercambio de libros') },
-      { column: 2, offset: 0, duration: 2, content: link('recoleccion', 'Recolección de residuos') }
+      { column: 1, offset: 0, duration: 2, className: 'tone-olive', content: link('intercambio-libros', 'Intercambio de libros') },
+      { column: 2, offset: 0, duration: 2, className: 'tone-cream', content: link('recoleccion', 'Recolección de residuos') }
     ]),
-    block(4, 15, 3, link('cafe-juegos', 'Café y juegos de mesa')),
-    group(4, 18, 3, [
-      { column: 1, offset: 0, duration: 3, content: link('baile', 'Taller de baile') },
-      { column: 2, offset: 0, duration: 3, content: link('cine', 'Noche de cine') }
-    ]),
+    block(4, 15, 3, link('cafe-juegos', 'Café y juegos de mesa'), 'tone-pink'),
+    block(4, 18, 3, link('cine', 'Noche de cine'), 'tone-olive'),
 
     group(5, 11, 2, [
-      { column: 1, offset: 0, duration: 2, content: link('ajedrez', 'Torneo de Ajedrez') },
-      { column: 2, offset: 0, duration: 2, content: link('badminton', 'Torneo de Badminton') }
+      { column: 1, offset: 0, duration: 2, className: 'tone-olive', content: link('ajedrez', 'Torneo de Ajedrez') },
+      { column: 2, offset: 0, duration: 2, className: 'tone-cream', content: link('badminton', 'Torneo de Badminton') }
     ]),
-    block(5, 14, 2, link('bingo', 'Gran Bingo')),
-    block(5, 17, 1, link('cierre', 'Acto de cierre')),
+    block(5, 14, 2, link('bingo', 'Gran Bingo'), 'tone-cream'),
+    block(5, 17, 1, link('cierre', 'Acto de cierre'), 'tone-pink'),
 
-    block(6, 11, 10, `${link('cartago', 'Nos vamos a Cartago')}<br><small>Transporte · volvemos a las 9:00 p. m.</small>`, 'cartago')
+    block(6, 11, 10, `${link('cartago', 'Nos vamos a Cartago')}<br><small>Transporte · volvemos a las 9:00 p. m.</small>`, 'cartago tone-olive')
   ].join('');
 
   document.head.insertAdjacentHTML('beforeend', `
@@ -108,7 +107,7 @@
       }
       .event-group{
         display:grid;
-        grid-template-columns:repeat(2,minmax(0,1fr));
+        grid-template-columns:repeat(var(--lanes,2),minmax(0,1fr));
         grid-template-rows:repeat(var(--hours),minmax(0,1fr));
         padding:2px!important;
         gap:3px
@@ -133,8 +132,12 @@
       .event-separator{color:#8d9d50;font-weight:bold}
       .narrow-left{width:48%;justify-self:start}
       .narrow-right{width:48%;justify-self:end}
+      .tone-olive{background:#aab66b!important}
+      .tone-pink{background:#dda39a!important}
+      .tone-cream{background:#f5eccd!important}
+      .tone-olive a,.tone-pink a{color:#173f45!important}
       .cartago{
-        background:#e1e8bd;
+        background:#aab66b;
         border-color:#8d9d50!important;
         font-size:.9rem
       }
