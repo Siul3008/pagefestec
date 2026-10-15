@@ -12,9 +12,9 @@
 
   const group = (day, start, duration, items) => {
     const cards = items.map(item =>
-      `<div class="mini-event ${item.className || ''}" style="grid-column:${item.column};grid-row:${item.offset + 1}/span ${item.duration}${item.style ? `;${item.style}` : ''}">${item.content}</div>`
+      `<div class="mini-event ${item.className || ''}" style="grid-column:${item.column}${item.columnSpan ? `/span ${item.columnSpan}` : ''};grid-row:${item.offset + 1}/span ${item.duration}${item.style ? `;${item.style}` : ''}">${item.content}</div>`
     ).join('');
-    const lanes = Math.max(...items.map(item => item.column));
+    const lanes = Math.max(...items.map(item => item.column + (item.columnSpan || 1) - 1));
     return `<div class="event-group" style="${position(day, start, duration)};--hours:${duration};--lanes:${lanes}">${cards}</div>`;
   };
 
@@ -52,8 +52,14 @@
     block(3, 14, 2, link('tour-amon', 'Tour Amón'), 'narrow-left tone-olive'),
     block(3, 16, 2, link('esports', 'Torneo de E-Sports'), 'narrow-left tone-pink'),
     group(3, 18, 3, [
-      { column: 1, offset: 0, duration: 3, className: 'tone-olive', content: link('parrillada', 'Parrillada') },
-      { column: 2, offset: 0, duration: 3, className: 'tone-cream', content: `${link('photobooth', 'Photobooth')}<br><span class="event-separator">+</span><br>${link('karaoke', 'Karaoke')}` },
+      {
+        column: 1,
+        columnSpan: 2,
+        offset: 0,
+        duration: 3,
+        className: 'party-combo',
+        content: `<span class="party-part tone-olive">${link('parrillada', 'Parrillada')}</span><span class="party-part tone-cream">${link('photobooth', 'Photobooth')}<br><span class="event-separator">+</span><br>${link('karaoke', 'Karaoke')}</span>`
+      },
       { column: 3, offset: 0, duration: 3, className: 'tone-pink', style: 'height:83.333%;align-self:start', content: `${link('baile', 'Taller de baile')}<br><small>6:00–8:30 p. m.</small>` }
     ]),
 
@@ -132,6 +138,21 @@
       .event-separator{color:#8d9d50;font-weight:bold}
       .narrow-left{width:48%;justify-self:start}
       .narrow-right{width:48%;justify-self:end}
+      .party-combo{
+        display:grid;
+        grid-template-columns:.9fr 1.1fr;
+        gap:3px;
+        padding:2px
+      }
+      .party-part{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        min-width:0;
+        padding:.35rem .25rem;
+        border-radius:3px;
+        line-height:1.18
+      }
       .tone-olive{background:#aab66b!important}
       .tone-pink{background:#dda39a!important}
       .tone-cream{background:#f5eccd!important}
