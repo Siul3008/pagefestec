@@ -11,7 +11,8 @@
     cine: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUOTdOWktGTENHM1AxUlo3TldYOU03VjlSSS4u',
     bingo: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUQTZXVVdXV1Q1NkNCMlkxMk03SURIMVBHQS4u',
     'scape-room': 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZURUNUVDcwQzdXNFpUQkcxUUgzTkhDMElaWS4u',
-    cartago: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUMVVXMFA0N0dVV1JIQVdYUkpVTVRLU0NITS4u'
+    cartago: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUMVVXMFA0N0dVV1JIQVdYUkpVTVRLU0NITS4u',
+    parrillada: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUOVAyQjlFU09QMFRMNVJNNFE2UkNOMUFESS4u'
   };
   window.FESTEC.activities.forEach(activity => {
     if (forms[activity.id]) {
