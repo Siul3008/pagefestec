@@ -11,6 +11,8 @@
     cine: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUOTdOWktGTENHM1AxUlo3TldYOU03VjlSSS4u',
     bingo: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUQTZXVVdXV1Q1NkNCMlkxMk03SURIMVBHQS4u',
     'scape-room': 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZURUNUVDcwQzdXNFpUQkcxUUgzTkhDMElaWS4u',
+    pintura: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUQ05JNU1IQUdWVTNHVk9JT1I1SkpRVFhNQS4u',
+    totebags: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUMUxKVEQ0OUFFUFhGTTc0NkQ4MEdRSURQNy4u',
     cartago: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUMVVXMFA0N0dVV1JIQVdYUkpVTVRLU0NITS4u',
     parrillada: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUOVAyQjlFU09QMFRMNVJNNFE2UkNOMUFESS4u'
   };
@@ -20,13 +22,4 @@
       activity.linkText = 'Formulario de inscripción';
     }
   });
-  const pintura = window.FESTEC.activities.find(activity => activity.id === 'pintura');
-  if (pintura) {
-    pintura.link = 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUQ05JNU1IQUdWVTNHVk9JT1I1SkpRVFhNQS4u';
-    pintura.linkText = 'Formulario de inscripción · Lienzos';
-    pintura.registrations = [
-      { label: 'Formulario de inscripción · Lienzos', day: 'Miércoles 21 de octubre · 11:00 a. m.', url: pintura.link },
-      { label: 'Formulario de inscripción · Tote Bags', day: 'Jueves 22 de octubre · 11:00 a. m.', url: 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=nR3Pv-qTsUO5Ah2qaKZCSEZxnWqjF31Jj3DnYBA0btZUMUxKVEQ0OUFFUFhGTTc0NkQ4MEdRSURQNy4u' }
-    ];
-  }
 })();

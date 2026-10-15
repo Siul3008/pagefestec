@@ -9,12 +9,19 @@
     ['cafe-juegos', 'Tarde de café y juegos'],
     ['baile-teatro', 'Torneo de Just Dance'],
     ['bingo', 'Bingo'],
-    ['parrillada', 'Parrillada, Trivia, Karaoke y Photobooth'],
+    ['parrillada', 'Parrillada'],
+    ['trivia', 'Trivia'],
+    ['karaoke', 'Karaoke'],
+    ['photobooth', 'Photobooth'],
     ['feria', 'Feria de Emprendedores'],
+    ['recoleccion', 'Recolección de Residuos'],
+    ['intercambio-libros', 'Intercambio de Libros'],
     ['finanzas', 'Taller de finanzas'],
     ['scape-room', 'Scape Room Intercarreras'],
     ['tour-amon', 'Tour Amón'],
-    ['cierre', 'Cierre y premiación'],
+    ['cierre', 'Cierre FESTEC'],
+    ['premiacion', 'Premiación de Torneos'],
+    ['merch', 'Entrega de Merch'],
     ['cartago', 'Viaje a Cartago']
   ].map(([id, label]) => `<a href="actividad.html?id=${id}">${label}</a>`).join('');
 })();
