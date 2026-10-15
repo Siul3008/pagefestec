@@ -3,19 +3,145 @@
   if (!schedule) return;
 
   const link = (id, text) => `<a href="actividad.html?id=${id}">${text}</a>`;
-  const event = text => `<div class="event">${text}</div>`;
-  const blank = '<div class="blank">—</div>';
-  const time = value => `<div class="time">${value}</div>`;
-  const separate = (...items) => items.join(' <span class="event-separator" aria-hidden="true">/</span> ');
+  const hourRow = hour => hour - 8;
+  const position = (day, start, duration) =>
+    `grid-column:${day};grid-row:${hourRow(start)}/span ${duration}`;
 
-  schedule.innerHTML = [
-    '<div class="head">HORA</div><div class="head">MARTES 20 OCTUBRE</div><div class="head">MIÉRCOLES 21 OCTUBRE</div><div class="head">JUEVES 22 OCTUBRE</div><div class="head">VIERNES 23 OCTUBRE</div><div class="head">SÁBADO 24 OCTUBRE</div>',
-    time('10:00'), event(link('acto-inicial', 'Acto inicial')), blank, blank, blank, event(`${link('cartago', 'Viaje a Cartago')}<br><small>9:00 a. m. – 11:00 p. m. aprox.</small>`),
-    time('11:00'), event(`${separate(link('futbol', 'Torneo de Fútbol'), link('origami', 'Taller de Origami'))}<br><small>11:00 a. m. – 1:00 p. m.</small>`), event(`${separate(link('voleibol', 'Torneo de Voleibol'), link('pintura', 'Pintura de Lienzos'))}<br><small>11:00 a. m. – 1:00 p. m.</small>`), event(`${separate(link('basketball', 'Torneo de Baloncesto'), link('totebags', 'Pintura de Tote Bags'))}<br><small>11:00 a. m. – 1:00 p. m.</small>`), event(`${separate(link('badminton', 'Torneo de Badminton'), link('ajedrez', 'Torneo de Ajedrez'))}<br><small>11:00 a. m. – 1:00 p. m.</small>`), blank,
-    time('13:00'), blank, blank, event(`${separate(link('feria', 'Feria de emprendedores'), link('recoleccion', 'Recolección de residuos'), link('intercambio-libros', 'Intercambio de libros'))}<br><small>1:00 p. m. – 4:00 p. m.</small>`), blank, blank,
-    time('14:00'), event(link('crochet', 'Taller de Crochet')), event(link('tour-amon', 'Tour Amón')), blank, event(`${link('bingo', 'Bingo')}<br><small>2:00 p. m. – 5:00 p. m.</small>`), blank,
-    time('16:00'), event(`${link('finanzas', 'Taller de finanzas')}<br><small>4:00 p. m. – 6:00 p. m.</small>`), event(`${separate(link('esports', 'Torneo de Videojuegos'), link('baile-teatro', 'Torneo de Just Dance'))}<br><small>4:00 p. m. – 6:00 p. m.</small>`), event(link('cafe-juegos', 'Café y juegos de mesa')), blank, blank,
-    time('18:00'), event(link('scape-room', 'Scape Room Intercarreras')), event(separate(link('cine', 'Noche de cine'), link('baile', 'Taller de baile'))), event(separate(link('parrillada', 'Parrillada'), link('trivia', 'Trivia'), link('karaoke', 'Karaoke'), link('photobooth', 'Photobooth'))), event(link('cierre', 'Cierre FESTEC, Premiación y Entrega de Merch')), blank
+  const block = (day, start, duration, content, extraClass = '') =>
+    `<div class="event schedule-block ${extraClass}" style="${position(day, start, duration)}">${content}</div>`;
+
+  const group = (day, start, duration, items) => {
+    const cards = items.map(item =>
+      `<div class="mini-event" style="grid-column:${item.column};grid-row:${item.offset + 1}/span ${item.duration}">${item.content}</div>`
+    ).join('');
+    return `<div class="event-group" style="${position(day, start, duration)};--hours:${duration}">${cards}</div>`;
+  };
+
+  const heads = [
+    'HORA',
+    'MARTES 20 OCTUBRE',
+    'MIÉRCOLES 21 OCTUBRE',
+    'JUEVES 22 OCTUBRE',
+    'VIERNES 23 OCTUBRE',
+    'SÁBADO 24 OCTUBRE'
+  ].map((label, index) =>
+    `<div class="head" style="grid-column:${index + 1};grid-row:1">${label}</div>`
+  ).join('');
+
+  const times = Array.from({ length: 11 }, (_, index) => {
+    const hour = index + 10;
+    return `<div class="time" style="grid-column:1;grid-row:${index + 2}">${String(hour).padStart(2, '0')}:00</div>`;
+  }).join('');
+
+  schedule.innerHTML = heads + times + [
+    block(2, 10, 1, link('acto-inicial', 'Acto inicial')),
+    group(2, 11, 2, [
+      { column: 1, offset: 0, duration: 2, content: link('futbol', 'Torneo FUT 3x3') },
+      { column: 2, offset: 0, duration: 1, content: link('origami', 'Taller de Origami') }
+    ]),
+    block(2, 14, 1, link('crochet', 'Taller de Crochet')),
+    block(2, 15, 2, link('finanzas', 'Taller de finanzas')),
+    block(2, 17, 2, link('scape-room', 'Scape Room Intercarreras')),
+
+    group(3, 11, 2, [
+      { column: 1, offset: 0, duration: 2, content: link('voleibol', 'Torneo de Voleibol') },
+      { column: 2, offset: 0, duration: 1, content: link('pintura', 'Pintura de lienzo') }
+    ]),
+    block(3, 12, 6, `${link('feria', 'Feria de emprendedores')}`, 'narrow-right'),
+    block(3, 14, 2, link('tour-amon', 'Tour Amón'), 'narrow-left'),
+    block(3, 16, 2, link('esports', 'Torneo de E-Sports'), 'narrow-left'),
+    group(3, 18, 3, [
+      { column: 1, offset: 0, duration: 3, content: link('parrillada', 'Parrillada') },
+      { column: 2, offset: 0, duration: 3, content: `${link('photobooth', 'Photobooth')}<br><span class="event-separator">+</span><br>${link('karaoke', 'Karaoke')}` }
+    ]),
+
+    group(4, 11, 2, [
+      { column: 1, offset: 0, duration: 2, content: link('totebags', 'Pintura de Tote Bags') },
+      { column: 2, offset: 0, duration: 2, content: link('basketball', 'Torneo de Baloncesto') }
+    ]),
+    group(4, 13, 2, [
+      { column: 1, offset: 0, duration: 2, content: link('intercambio-libros', 'Intercambio de libros') },
+      { column: 2, offset: 0, duration: 2, content: link('recoleccion', 'Recolección de residuos') }
+    ]),
+    block(4, 15, 3, link('cafe-juegos', 'Café y juegos de mesa')),
+    group(4, 18, 3, [
+      { column: 1, offset: 0, duration: 3, content: link('baile', 'Taller de baile') },
+      { column: 2, offset: 0, duration: 3, content: link('cine', 'Noche de cine') }
+    ]),
+
+    group(5, 11, 2, [
+      { column: 1, offset: 0, duration: 2, content: link('ajedrez', 'Torneo de Ajedrez') },
+      { column: 2, offset: 0, duration: 2, content: link('badminton', 'Torneo de Badminton') }
+    ]),
+    block(5, 14, 2, link('bingo', 'Gran Bingo')),
+    block(5, 17, 1, link('cierre', 'Acto de cierre')),
+
+    block(6, 11, 10, `${link('cartago', 'Nos vamos a Cartago')}<br><small>Transporte · volvemos a las 9:00 p. m.</small>`, 'cartago')
   ].join('');
-  document.head.insertAdjacentHTML('beforeend', '<style>.schedule{grid-template-columns:80px repeat(5,1fr);min-width:940px}.schedule .event{display:block;padding:.6rem .35rem}.schedule .event a{color:#00546a;text-decoration:underline;text-decoration-color:#8d9d50;text-underline-offset:3px}.schedule .event a:hover{color:#8d9d50}.event-separator{padding:0 .18rem;color:#8d9d50;font-weight:bold}</style>');
+
+  document.head.insertAdjacentHTML('beforeend', `
+    <style>
+      .schedule{
+        grid-template-columns:80px repeat(5,minmax(150px,1fr));
+        grid-template-rows:auto repeat(11,52px);
+        min-width:980px;
+        position:relative
+      }
+      .schedule>div{min-height:0}
+      .schedule .head,.schedule .time{position:relative;z-index:3;background:#fffdf8}
+      .schedule .time{display:flex;align-items:flex-start;justify-content:center;padding-top:.45rem}
+      .schedule-block,.event-group{
+        margin:3px;
+        border:1px solid rgba(0,84,106,.25)!important;
+        border-radius:4px;
+        background:#f8efd9;
+        position:relative;
+        z-index:2;
+        overflow:hidden
+      }
+      .schedule .schedule-block{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:.45rem;
+        line-height:1.25
+      }
+      .event-group{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        grid-template-rows:repeat(var(--hours),minmax(0,1fr));
+        padding:2px!important;
+        gap:3px
+      }
+      .mini-event{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:.35rem .25rem;
+        border-radius:3px;
+        background:#eef0dc;
+        line-height:1.18;
+        overflow:hidden
+      }
+      .schedule .event a,.mini-event a{
+        color:#00546a;
+        text-decoration:underline;
+        text-decoration-color:#8d9d50;
+        text-underline-offset:3px
+      }
+      .schedule .event a:hover,.mini-event a:hover{color:#8d9d50}
+      .event-separator{color:#8d9d50;font-weight:bold}
+      .narrow-left{width:48%;justify-self:start}
+      .narrow-right{width:48%;justify-self:end}
+      .cartago{
+        background:#e1e8bd;
+        border-color:#8d9d50!important;
+        font-size:.9rem
+      }
+      .cartago small{display:block;margin-top:.45rem;font:600 .65rem/1.3 Arial,sans-serif;color:#596d3b}
+      @media(max-width:720px){
+        .schedule{grid-template-columns:72px repeat(5,150px)}
+      }
+    </style>
+  `);
 })();
