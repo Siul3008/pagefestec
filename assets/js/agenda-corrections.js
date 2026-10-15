@@ -60,7 +60,7 @@
         className: 'tone-olive party-list',
         content: `${link('parrillada', 'Parrillada')}<br>${link('photobooth', 'Photobooth')}<br>${link('karaoke', 'Karaoke')}`
       },
-      { column: 3, offset: 0, duration: 3, className: 'tone-pink', style: 'height:83.333%;align-self:start', content: `${link('baile', 'Taller de baile')}<br><small>6:00–8:30 p. m.</small>` }
+      { column: 3, offset: 0, duration: 3, className: 'tone-pink', style: 'height:83.333%;align-self:start', content: link('baile', 'Taller de baile') }
     ]),
 
     group(4, 11, 2, [
@@ -81,7 +81,7 @@
     block(5, 14, 2, link('bingo', 'Gran Bingo'), 'tone-cream'),
     block(5, 17, 1, link('cierre', 'Acto de cierre'), 'tone-pink'),
 
-    block(6, 11, 10, `${link('cartago', 'Nos vamos a Cartago')}<br><small>Transporte · volvemos a las 9:00 p. m.</small>`, 'cartago tone-olive')
+    block(6, 11, 10, link('cartago', 'Nos vamos a Cartago'), 'cartago tone-olive')
   ].join('');
 
   document.head.insertAdjacentHTML('beforeend', `
