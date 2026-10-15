@@ -19,9 +19,7 @@
     ['finanzas', 'Taller de finanzas'],
     ['scape-room', 'Scape Room Intercarreras'],
     ['tour-amon', 'Tour Amón'],
-    ['cierre', 'Cierre FESTEC'],
-    ['premiacion', 'Premiación de Torneos'],
-    ['merch', 'Entrega de Merch'],
+    ['cierre', 'Cierre, Premiación y Merch'],
     ['cartago', 'Viaje a Cartago']
   ].map(([id, label]) => `<a href="actividad.html?id=${id}">${label}</a>`).join('');
 })();
