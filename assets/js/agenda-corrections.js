@@ -12,9 +12,10 @@
 
   const group = (day, start, duration, items) => {
     const cards = items.map(item =>
-      `<div class="mini-event" style="grid-column:${item.column};grid-row:${item.offset + 1}/span ${item.duration}">${item.content}</div>`
+      `<div class="mini-event" style="grid-column:${item.column};grid-row:${item.offset + 1}/span ${item.duration}${item.style ? `;${item.style}` : ''}">${item.content}</div>`
     ).join('');
-    return `<div class="event-group" style="${position(day, start, duration)};--hours:${duration}">${cards}</div>`;
+    const lanes = Math.max(...items.map(item => item.column));
+    return `<div class="event-group" style="${position(day, start, duration)};--hours:${duration};--lanes:${lanes}">${cards}</div>`;
   };
 
   const heads = [
@@ -52,7 +53,8 @@
     block(3, 16, 2, link('esports', 'Torneo de E-Sports'), 'narrow-left'),
     group(3, 18, 3, [
       { column: 1, offset: 0, duration: 3, content: link('parrillada', 'Parrillada') },
-      { column: 2, offset: 0, duration: 3, content: `${link('photobooth', 'Photobooth')}<br><span class="event-separator">+</span><br>${link('karaoke', 'Karaoke')}` }
+      { column: 2, offset: 0, duration: 3, content: `${link('photobooth', 'Photobooth')}<br><span class="event-separator">+</span><br>${link('karaoke', 'Karaoke')}` },
+      { column: 3, offset: 0, duration: 3, style: 'height:83.333%;align-self:start', content: `${link('baile', 'Taller de baile')}<br><small>6:00–8:30 p. m.</small>` }
     ]),
 
     group(4, 11, 2, [
@@ -64,10 +66,7 @@
       { column: 2, offset: 0, duration: 2, content: link('recoleccion', 'Recolección de residuos') }
     ]),
     block(4, 15, 3, link('cafe-juegos', 'Café y juegos de mesa')),
-    group(4, 18, 3, [
-      { column: 1, offset: 0, duration: 3, content: link('baile', 'Taller de baile') },
-      { column: 2, offset: 0, duration: 3, content: link('cine', 'Noche de cine') }
-    ]),
+    block(4, 18, 3, link('cine', 'Noche de cine')),
 
     group(5, 11, 2, [
       { column: 1, offset: 0, duration: 2, content: link('ajedrez', 'Torneo de Ajedrez') },
@@ -108,7 +107,7 @@
       }
       .event-group{
         display:grid;
-        grid-template-columns:repeat(2,minmax(0,1fr));
+        grid-template-columns:repeat(var(--lanes,2),minmax(0,1fr));
         grid-template-rows:repeat(var(--hours),minmax(0,1fr));
         padding:2px!important;
         gap:3px
