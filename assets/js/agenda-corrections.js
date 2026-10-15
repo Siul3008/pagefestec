@@ -57,8 +57,8 @@
         columnSpan: 2,
         offset: 0,
         duration: 3,
-        className: 'party-combo',
-        content: `<span class="party-part tone-olive">${link('parrillada', 'Parrillada')}</span><span class="party-part tone-cream">${link('photobooth', 'Photobooth')}<br><span class="event-separator">+</span><br>${link('karaoke', 'Karaoke')}</span>`
+        className: 'tone-olive party-list',
+        content: `${link('parrillada', 'Parrillada')}<br>${link('photobooth', 'Photobooth')}<br>${link('karaoke', 'Karaoke')}`
       },
       { column: 3, offset: 0, duration: 3, className: 'tone-pink', style: 'height:83.333%;align-self:start', content: `${link('baile', 'Taller de baile')}<br><small>6:00–8:30 p. m.</small>` }
     ]),
@@ -138,20 +138,10 @@
       .event-separator{color:#8d9d50;font-weight:bold}
       .narrow-left{width:48%;justify-self:start}
       .narrow-right{width:48%;justify-self:end}
-      .party-combo{
-        display:grid;
-        grid-template-columns:.9fr 1.1fr;
-        gap:3px;
-        padding:2px
-      }
-      .party-part{
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        min-width:0;
-        padding:.35rem .25rem;
-        border-radius:3px;
-        line-height:1.18
+      .party-list{
+        display:block!important;
+        padding:1rem .45rem!important;
+        line-height:1.9!important
       }
       .tone-olive{background:#aab66b!important}
       .tone-pink{background:#dda39a!important}
