@@ -3,6 +3,8 @@
   if (!nav) return;
   const currentId = new URLSearchParams(location.search).get('id');
   const currentActivity = window.FESTEC.activities.find(activity => activity.id === currentId);
+  const placeFact = document.querySelector('.ref-facts li:nth-child(3)');
+  if (placeFact && currentActivity) placeFact.textContent = `Ubicación: ${currentActivity.place}`;
   if (currentActivity?.registrations) {
     const facts = document.querySelector('.ref-facts');
     const firstButton = document.querySelector('.ref-button');

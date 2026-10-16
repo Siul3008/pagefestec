@@ -15,6 +15,6 @@
   document.querySelector('#intro').textContent = current.intro;
   document.querySelector('#activity-list').innerHTML = activities.length ? activities.map(activity => `
     <a class="card" href="actividad.html?id=${encodeURIComponent(activity.id)}">
-      <img src="${backgrounds[activity.cat]}" alt="" loading="lazy"><small>${escape(activity.day)} · ${escape(activity.time)}</small><h2>${escape(activity.title)}</h2><p>${escape(activity.place)}</p><b>Ver actividad →</b>
+      <img src="${backgrounds[activity.cat]}" alt="" loading="lazy"><small>${escape(activity.day)} · ${escape(activity.time)}</small><h2>${escape(activity.title)}</h2><p>Ubicación: ${escape(activity.place)}</p><b>Ver actividad →</b>
     </a>`).join('') : '<p class="empty">Pronto compartiremos las actividades de esta categoría.</p>';
 })();
