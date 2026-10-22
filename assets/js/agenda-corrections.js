@@ -10,12 +10,12 @@
   const block = (day, start, duration, content, extraClass = '') =>
     `<div class="event schedule-block ${extraClass}" style="${position(day, start, duration)}">${content}</div>`;
 
-  const group = (day, start, duration, items) => {
+  const group = (day, start, duration, items, extraClass = '') => {
     const cards = items.map(item =>
       `<div class="mini-event ${item.className || ''}" style="grid-column:${item.column}${item.columnSpan ? `/span ${item.columnSpan}` : ''};grid-row:${item.offset + 1}/span ${item.duration}${item.style ? `;${item.style}` : ''}">${item.content}</div>`
     ).join('');
     const lanes = Math.max(...items.map(item => item.column + (item.columnSpan || 1) - 1));
-    return `<div class="event-group" style="${position(day, start, duration)};--hours:${duration};--lanes:${lanes}">${cards}</div>`;
+    return `<div class="event-group ${extraClass}" style="${position(day, start, duration)};--hours:${duration};--lanes:${lanes}">${cards}</div>`;
   };
 
   const heads = [
@@ -35,22 +35,19 @@
   }).join('');
 
   schedule.innerHTML = heads + times + [
-    block(2, 10, 1, link('acto-inicial', 'Acto inicial'), 'tone-pink'),
-    group(2, 11, 2, [
-      { column: 1, offset: 0, duration: 2, className: 'tone-olive', content: link('futbol', 'Torneo FUT 3x3') },
-      { column: 2, offset: 0, duration: 1, className: 'tone-pink', content: link('origami', 'Taller de Origami') }
-    ]),
-    block(2, 14, 1, link('crochet', 'Taller de Crochet'), 'tone-cream'),
-    block(2, 15, 2, link('finanzas', 'Taller de finanzas'), 'tone-olive'),
-    block(2, 17, 2, link('scape-room', 'Scape Room Intercarreras'), 'tone-pink'),
+    block(2, 11, 2, link('futbol', 'Torneo de Fútbol 3x3'), 'tone-olive'),
 
+    block(3, 10, 1, link('acto-inicial', 'Acto inicial'), 'tone-pink'),
     group(3, 11, 2, [
       { column: 1, offset: 0, duration: 2, className: 'tone-cream', content: link('voleibol', 'Torneo de Voleibol') },
       { column: 2, offset: 0, duration: 1, className: 'tone-pink', content: link('pintura', 'Pintura de lienzo') }
     ]),
-    block(3, 12, 6, `${link('feria', 'Feria de emprendedores')}`, 'narrow-right tone-cream'),
-    block(3, 14, 2, link('tour-amon', 'Tour Amón'), 'narrow-left tone-olive'),
-    block(3, 16, 2, link('esports', 'Torneo de E-Sports'), 'narrow-left tone-pink'),
+    block(3, 12, 6, link('feria', 'Feria de<br>emprendedores'), 'slim-right tone-cream'),
+    group(3, 14, 4, [
+      { column: 1, offset: 0, duration: 2, className: 'tone-cream', content: link('crochet', 'Taller de<br>Crochet') },
+      { column: 2, offset: 0, duration: 4, className: 'tone-pink', content: link('esports', 'Torneo de<br>E-Sports') },
+      { column: 3, offset: 0, duration: 2, className: 'tone-olive', content: link('tour-amon', 'Tour<br>Amón') }
+    ], 'wide-left three-lane'),
     group(3, 18, 3, [
       {
         column: 1,
@@ -60,7 +57,7 @@
         className: 'tone-olive party-list',
         content: `${link('parrillada', 'Parrillada')}<br>${link('photobooth', 'Photobooth')}<br>${link('karaoke', 'Karaoke')}`
       },
-      { column: 3, offset: 0, duration: 3, className: 'tone-pink', style: 'height:83.333%;align-self:start', content: link('baile', 'Taller de baile') }
+      { column: 3, offset: 0, duration: 3, className: 'tone-pink', content: link('baile', 'Taller de baile') }
     ]),
 
     group(4, 11, 2, [
@@ -71,15 +68,18 @@
       { column: 1, offset: 0, duration: 2, className: 'tone-olive', content: link('intercambio-libros', 'Intercambio de libros') },
       { column: 2, offset: 0, duration: 2, className: 'tone-cream', content: link('recoleccion', 'Recolección de residuos') }
     ]),
-    block(4, 15, 3, link('cafe-juegos', 'Café y juegos de mesa'), 'tone-pink'),
-    block(4, 18, 3, link('cine', 'Noche de cine'), 'tone-olive'),
+    block(4, 16, 2, link('cafe-juegos', 'Café y juegos de mesa'), 'tone-pink'),
+    group(4, 18, 3, [
+      { column: 1, offset: 0, duration: 3, className: 'tone-olive', content: link('cine', 'Noche de cine') },
+      { column: 2, offset: 0, duration: 3, className: 'tone-pink', content: link('scape-room', 'Escape Room<br>Intercarreras') }
+    ]),
 
     group(5, 11, 2, [
       { column: 1, offset: 0, duration: 2, className: 'tone-olive', content: link('ajedrez', 'Torneo de Ajedrez') },
       { column: 2, offset: 0, duration: 2, className: 'tone-cream', content: link('badminton', 'Torneo de Badminton') }
     ]),
-    block(5, 14, 2, link('bingo', 'Gran Bingo'), 'tone-cream'),
-    block(5, 17, 1, link('cierre', 'Acto de cierre'), 'tone-pink'),
+    block(5, 15, 2, link('bingo', 'Gran Bingo'), 'tone-cream'),
+    block(5, 18, 1, link('cierre', 'Acto de cierre'), 'tone-pink'),
 
     block(6, 11, 10, link('cartago', 'Nos vamos a Cartago'), 'cartago tone-olive')
   ].join('');
@@ -138,6 +138,9 @@
       .event-separator{color:#8d9d50;font-weight:bold}
       .narrow-left{width:48%;justify-self:start}
       .narrow-right{width:48%;justify-self:end}
+      .wide-left{width:65%;justify-self:start}
+      .slim-right{width:34%;justify-self:end}
+      .three-lane .mini-event{font-size:.68rem;padding:.25rem .12rem}
       .party-list{
         display:block!important;
         padding:1rem .45rem!important;
