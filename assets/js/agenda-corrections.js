@@ -44,9 +44,9 @@
     ]),
     block(3, 12, 6, link('feria', 'Feria de<br>emprendedores'), 'slim-right tone-cream'),
     group(3, 14, 4, [
-      { column: 1, offset: 0, duration: 2, className: 'tone-cream', content: link('crochet', 'Taller de<br>Crochet') },
-      { column: 2, offset: 0, duration: 4, className: 'tone-pink', content: link('esports', 'Torneo de<br>E-Sports') },
-      { column: 3, offset: 0, duration: 2, className: 'tone-olive', content: link('tour-amon', 'Tour<br>Amón') }
+      { column: 1, offset: 0, duration: 2, className: 'tone-cream', content: link('crochet', 'Taller de Crochet') },
+      { column: 2, offset: 0, duration: 4, className: 'tone-pink', content: link('esports', 'Torneo de E-Sports') },
+      { column: 3, offset: 0, duration: 2, className: 'tone-olive', content: link('tour-amon', 'Tour Amón') }
     ], 'wide-left three-lane'),
     group(3, 18, 3, [
       {
@@ -141,6 +141,7 @@
       .wide-left{width:65%;justify-self:start}
       .slim-right{width:34%;justify-self:end}
       .three-lane .mini-event{font-size:.68rem;padding:.25rem .12rem}
+      .three-lane .mini-event a{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap}
       .party-list{
         display:block!important;
         padding:1rem .45rem!important;
